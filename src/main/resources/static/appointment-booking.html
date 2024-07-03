@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Booking - Hospital Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Appointment Booking</h1>
+        <p>Allow patients to book, reschedule, or cancel appointments with doctors.</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="patient-registration.html">Patient Registration</a></li>
+                <li><a href="doctor-consultation.html">Doctor Consultation</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="appointment-form">
+        <div class="container">
+            <form id="appointmentForm">
+                <label for="patientName">Patient Name:</label>
+                <input type="text" id="patientName" name="patientName" required>
+
+                <label for="doctor">Doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="">Select a Doctor</option>
+                    <option value="Dr. Smith">Dr. Smith</option>
+                    <option value="Dr. Johnson">Dr. Johnson</option>
+                    <option value="Dr. Brown">Dr. Brown</option>
+                </select>
+
+                <label for="appointmentDate">Appointment Date:</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+                <label for="appointmentTime">Appointment Time:</label>
+                <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+                <button type="submit">Book Appointment</button>
+            </form>
+
+            <form id="rescheduleForm" class="hidden">
+                <label for="rescheduleAppointmentId">Appointment ID:</label>
+                <input type="text" id="rescheduleAppointmentId" name="appointmentId" required>
+
+                <label for="newAppointmentDate">New Appointment Date:</label>
+                <input type="date" id="newAppointmentDate" name="appointmentDate" required>
+
+                <label for="newAppointmentTime">New Appointment Time:</label>
+                <input type="time" id="newAppointmentTime" name="appointmentTime" required>
+
+                <button type="submit">Reschedule Appointment</button>
+            </form>
+
+            <form id="cancelForm" class="hidden">
+                <label for="cancelAppointmentId">Appointment ID:</label>
+                <input type="text" id="cancelAppointmentId" name="appointmentId" required>
+
+
+            </form>
+
+
+            <button id="showCancelForm">Cancel Appointment</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        // Log form data (you can send it to a backend service here)
+        console.log({
+            patientName: formData.get('patientName'),
+            doctor: formData.get('doctor'),
+            appointmentDate: formData.get('appointmentDate'),
+            appointmentTime: formData.get('appointmentTime')
+        });
+
+        alert('Appointment booked successfully!');
+    });
+
+    document.getElementById('rescheduleForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        console.log({
+            appointmentId: formData.get('appointmentId'),
+            newAppointmentDate: formData.get('appointmentDate'),
+            newAppointmentTime: formData.get('appointmentTime')
+        });
+
+        alert('Appointment rescheduled successfully!');
+    });
+
+    document.getElementById('cancelForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        console.log({
+            appointmentId: formData.get('appointmentId')
+        });
+
+        alert('Appointment canceled successfully!');
+    });
+
+    document.getElementById('showRescheduleForm').addEventListener('click', function() {
+        document.getElementById('rescheduleForm').classList.toggle('hidden');
+    });
+
+    document.getElementById('showCancelForm').addEventListener('click', function() {
+        document.getElementById('cancelForm').classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>
